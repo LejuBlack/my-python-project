@@ -5,9 +5,6 @@ import asyncio
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
 import os
-from dotenv import load_dotenv
-
-load_dotenv()
 
 intents = discord.Intents.default()
 intents.message_content = True
@@ -21,14 +18,9 @@ FFMPEG_OPTIONS = {
 
 YDL_OPTIONS = {'format': 'bestaudio', 'noplaylist': True}
 
-print("DISCORD_TOKEN:", os.getenv('DISCORD_TOKEN'))
-print("SPOTIFY_CLIENT_ID:", os.getenv('SPOTIFY_CLIENT_ID'))
-print("SPOTIFY_CLIENT_SECRET:", os.getenv('SPOTIFY_CLIENT_SECRET'))
-
-# Get the credentials from environment variables
-DISCORD_TOKEN = os.getenv('DISCORD_TOKEN')
-SPOTIFY_CLIENT_ID = os.getenv('SPOTIFY_CLIENT_ID')
-SPOTIFY_CLIENT_SECRET = os.getenv('SPOTIFY_CLIENT_SECRET')
+# Spotify credentials (replace with your own client ID and secret)
+SPOTIFY_CLIENT_ID = "350af28d36534383b7554d5d453fafd0"
+SPOTIFY_CLIENT_SECRET = "21bfc613e74d475ba8cafa37cac77bad"
 
 sp = spotipy.Spotify(auth_manager=SpotifyClientCredentials(client_id=SPOTIFY_CLIENT_ID, client_secret=SPOTIFY_CLIENT_SECRET))
 
@@ -286,7 +278,7 @@ async def on_voice_state_update(member, before, after):
 async def main():
     try:
         await client.add_cog(MusicBot(client))
-        await client.start(DISCORD_TOKEN)
+        await client.start("MTI2MDE3OTY2OTA5ODAzNzI0OQ.G0OvKf.zV9bGomPSG_9CrmZRXoqLQA-5q_NKlFldP4T5Q")
     except discord.errors.HTTPException as e:
         if e.status == 429:
             retry_after = int(e.response.headers.get('Retry-After', 0))
